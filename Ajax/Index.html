@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ajax</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href=""> -->
+        <style>
+            #form-messages{
+                background-color: aqua;
+                color: brown;
+            }
+
+            #username{
+                background-color: aqua;
+                color: brown;  
+            }
+            #password{
+                background-color: plum;
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <h1>Ajax Form</h1>
+        <div class="form">
+            <ol id="form-messages"></ol>
+            <label for="username">username</label>
+            <input type="text" id="username" spellcheck="false">
+            <label for="password">password</label>
+            <input type="password" id="password">
+
+            <button type="submit" id="btn-submit">login</button>
+        </div>
+        
+        <!-- <script src="" async defer></script> -->
+        <script>
+                const form={
+                    username:document.getElementById('username'),
+                    password:document.getElementById('password'),
+                    submit:document.getElementById('btn-submit'),
+                    messages:document.getElementById('form-messages')
+                };
+                form.submit.addEventListener('click',() =>{
+                          const request=new XMLHttpRequest();
+
+                          request.onload= () => {
+                            let responseObject=null;
+
+                            try{
+                                responseObject=JSON.parse(request.responseText);
+                            }
+                            catch(e){
+                                 console.error('failed');
+                            }
+                            if(responseObject){
+                                handleResponse(responseObject);
+                                
+                            }
+                          };
+                          const requestData='username = $(form.username.value) & password = $(form.password.value)';
+                          request.open('post','check-login.php');
+                          request.setRequestHeader('content-type','application/x-www-form-urlencoded');
+                          request.send(requestData);  
+
+                });
+
+                function handleResponse(responseObject){
+                    if(responseObject.ok){
+                        location.href='dashboard.html';
+                    }
+                    else{
+                        while(form.messages.firstChild){
+                             form.messages.removeChild(form.messages.firstChild);
+                        }
+                        responseObject.messages.forEach((messages) => {
+                            const li=document.createElement('li');
+                            li.textContent=message;
+                            form.messages.appendChild(li);
+
+                        });
+                        form.messages.style.display=block;
+                    }
+                }
+
+
+
+        </script>
+    </body>
+</html>
