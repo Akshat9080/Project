@@ -1,0 +1,63 @@
+#btn1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+#btn1:hover {
+    background-color:black;
+    color: white;
+  }  
+  
+#btn2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid rgb(64, 226, 64);
+    cursor: pointer;
+    border-radius: 8px;
+  }
+#btn2:hover {
+    background-color: #4CAF50;
+    color: white;
+  }  
+#btn3 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid yellow;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  
+#btn3:hover {
+    background-color: yellow;
+    color: white;
+  }
+  
+#btn4 {
+    background-color: white;
+    color: black;
+    border: 2px solid blue;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+#btn4:hover {
+    background-color: blue;
+    color: white;
+  }  
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 5px solid black;
+  }
+
+  .data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
